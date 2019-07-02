@@ -1,7 +1,7 @@
 {
   "name": "paginated-table",
   "vendor": "vtex",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "title": "Paginated Table",
   "description": "Paginated table based on styleguide's table",
   "scripts": {
