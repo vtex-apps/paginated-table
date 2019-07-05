@@ -146,6 +146,7 @@ const PaginatedTable = <
         onNextClick: onPageChange(nextPage),
         onPrevClick: onPageChange(previousPage),
         rowsOptions: [5, 10, 15, 25],
+        selectedOption: elementsPerPage,
         onRowsChange: async (e: React.ChangeEvent<HTMLSelectElement>) => {
           setElementsPerPage(parseInt(e.target.value))
           onPageChange(currentPage, parseInt(e.target.value))()
