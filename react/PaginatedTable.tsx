@@ -19,6 +19,7 @@ type TableProps<TItem, TSchema extends JSONSchema6Type> = {
   schema: TSchema
   loading?: boolean
   emptyStateLabel?: React.ReactNode
+  emptyStateChildren?: React.ReactNode
   onRowClick?: OnRowClickHandler<TItem>
   totalizers?: any
   filters?: any
@@ -61,6 +62,28 @@ type TableProps<TItem, TSchema extends JSONSchema6Type> = {
       handleCallback: () => void
     }
   }
+  lineActions?: {
+    label: () => IntlMessage
+    isDangerous?: boolean
+    onClick: Function
+  }[]
+  bulkActions?: {
+    texts: {
+      secondaryActionsLabel: string
+      rowsSelected: Function
+      selectAll: string
+      allRowsSelected: Function
+    }
+    totalItems?: number
+    main: {
+      label: string
+      handleCallback: Function
+    }
+    others: {
+      label: string
+      handleCallback: Function
+    }[]
+  }
 }
 
 export type OnRowClickHandler<TItem> = ({ rowData }: { rowData: TItem }) => void
@@ -90,7 +113,7 @@ const PaginatedTable = <
   const [elementsPerPage, setElementsPerPage] = useState(
     INITIAL_ELEMENTS_PER_PAGE
   )
-  const [sortedBy, setSortedBy] = useState('eventDate')
+  const [sortedBy, setSortedBy] = useState('')
   const [sortOrder, setSortOrder] = useState('ASC')
 
   const {
