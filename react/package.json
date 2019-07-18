@@ -10,7 +10,7 @@
     "@types/jest": "^24.0.11",
     "@types/json-schema": "^7.0.3",
     "@types/node": "^10.12.17",
-    "@types/react": "^16.7.17",
+    "@types/react": "^16.8.23",
     "@vtex/test-tools": "^0.1.4",
     "prettier": "^1.16.4",
     "tslint": "^5.12.0",
