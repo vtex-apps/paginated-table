@@ -10,7 +10,6 @@ const INITIAL_ELEMENTS_PER_PAGE = 15
 type Props<TItem, TSchema extends JSONSchema6Type> = {
   total: number
   updatePaginationKey?: string
-  onSortChange?: (sortedBy: string, sortOrder: string) => void
   defaultElementsPerPage?: number
   defaultSortOrder?: string
   defaultSortedBy?: string
@@ -116,10 +115,9 @@ const PersistedPaginatedTable = <
     items = [],
     total,
     updatePaginationKey,
-    onSortChange = () => { },
     defaultSortOrder = 'ASC',
     defaultElementsPerPage = INITIAL_ELEMENTS_PER_PAGE,
-    defaultSortedBy='',
+    defaultSortedBy = '',
     ...tableProps
   } = props
 
@@ -185,7 +183,6 @@ const PersistedPaginatedTable = <
         sortedBy: string
       }) => {
         setQuery({ sortOrder: newSortOrder, sortedBy: newSortedBy })
-        onSortChange(newSortedBy, newSortOrder)
       }}
       {...tableProps}
     />
