@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Table } from 'vtex.styleguide'
 import { JSONSchema6Type } from 'json-schema'
 import { defineMessages, FormattedMessage } from 'react-intl'
@@ -13,6 +13,7 @@ type Props<TItem, TSchema extends JSONSchema6Type> = {
   onSortChange?: (sortedBy: string, sortOrder: string) => void
   defaultElementsPerPage?: number
   defaultSortOrder?: string
+  defaultSortedBy?: string
 } & TableProps<TItem, TSchema>
 
 type TableProps<TItem, TSchema extends JSONSchema6Type> = {
@@ -107,7 +108,6 @@ const PersistedPaginatedTable = <
 >(
   props: Props<TItem, TSchema>
 ) => {
-  const [sortedBy, setSortedBy] = useState('')
   const didMountRef = useRef(false)
 
   const { setQuery, query } = useRuntime()
@@ -119,6 +119,7 @@ const PersistedPaginatedTable = <
     onSortChange = () => { },
     defaultSortOrder = 'ASC',
     defaultElementsPerPage = INITIAL_ELEMENTS_PER_PAGE,
+    defaultSortedBy='',
     ...tableProps
   } = props
 
@@ -148,6 +149,7 @@ const PersistedPaginatedTable = <
   const from = parseInt(query.from) || 0
   const to = parseInt(query.to) || elementsPerPage
   const sortOrder = query.sortOrder || defaultSortOrder
+  const sortedBy = query.sortedBy || defaultSortedBy
 
   return (
     <Table
@@ -182,8 +184,7 @@ const PersistedPaginatedTable = <
         sortOrder: string
         sortedBy: string
       }) => {
-        setQuery({ sortOrder: newSortOrder })
-        setSortedBy(newSortedBy)
+        setQuery({ sortOrder: newSortOrder, sortedBy: newSortedBy })
         onSortChange(newSortedBy, newSortOrder)
       }}
       {...tableProps}
