@@ -123,7 +123,7 @@ const PersistedPaginatedTable = <
 
   useEffect(() => {
     if (didMountRef.current) {
-      setQuery({ to: defaultElementsPerPage, from: 0, elements: defaultElementsPerPage })
+      setQuery({ to: defaultElementsPerPage, from: 1, elements: defaultElementsPerPage })
     } else {
       didMountRef.current = true
     }
@@ -144,7 +144,7 @@ const PersistedPaginatedTable = <
   }
 
   const elementsPerPage = parseInt(query.elements) || defaultElementsPerPage
-  const from = parseInt(query.from) || 0
+  const from = parseInt(query.from) || 1
   const to = parseInt(query.to) || elementsPerPage
   const sortOrder = query.sortOrder || defaultSortOrder
   const sortedBy = query.sortedBy || defaultSortedBy
@@ -154,7 +154,7 @@ const PersistedPaginatedTable = <
       fullWidth
       items={items}
       pagination={{
-        currentItemFrom: from + 1,
+        currentItemFrom: from,
         currentItemTo: to,
         onNextClick: onPageChange(from, elementsPerPage, 'next'),
         onPrevClick: onPageChange(from, elementsPerPage, 'prev'),
