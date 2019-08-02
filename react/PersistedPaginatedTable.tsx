@@ -92,11 +92,11 @@ export type IntlMessage = string | JSX.Element
 
 const messages = defineMessages({
   of: {
-    id: 'admin/channels.table.of',
+    id: 'admin/table.of',
     defaultMessage: 'of',
   },
   showRowsLabel: {
-    id: 'admin/channels.table.show-rows',
+    id: 'admin/table.show-rows',
     defaultMessage: 'Show rows',
   },
 })
