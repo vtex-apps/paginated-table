@@ -1,14 +1,15 @@
 {
   "name": "paginated-table",
   "vendor": "vtex",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "title": "Paginated Table",
   "description": "Paginated table based on styleguide's table",
   "scripts": {
     "prereleasy": "bash pre.sh"
   },
   "builders": {
-    "react": "3.x"
+    "react": "3.x",
+    "messages": "1.x"
   },
   "dependencies": {
     "vtex.styleguide": "9.x"

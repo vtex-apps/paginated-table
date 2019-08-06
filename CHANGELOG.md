@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2019-08-06
+
+### Fixed
+
+- Labels 'Show rows' and 'of' are now internationalized. They were displaying in English, even if the user selected Portuguese or Spanish display.
+
 ## [0.4.0] - 2019-07-19
 
 ### Added
