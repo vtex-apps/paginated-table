@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Table } from 'vtex.styleguide'
-import { GraphqlQueryControls } from 'react-apollo'
 import { JSONSchema6Type } from 'json-schema'
+import React, { useEffect, useState } from 'react'
+import { GraphqlQueryControls } from 'react-apollo'
 import { defineMessages, FormattedMessage } from 'react-intl'
+import { Table } from 'vtex.styleguide'
 
 const INITIAL_ELEMENTS_PER_PAGE = 15
 
@@ -21,6 +21,7 @@ type TableProps<TItem, TSchema extends JSONSchema6Type> = {
   emptyStateLabel?: React.ReactNode
   emptyStateChildren?: React.ReactNode
   onRowClick?: OnRowClickHandler<TItem>
+  selectedRows?: any
   totalizers?: any
   filters?: any
   toolbar?: {
@@ -52,21 +53,21 @@ type TableProps<TItem, TSchema extends JSONSchema6Type> = {
     }
     extraActions?: {
       label: IntlMessage
-      actions: {
-        label: IntlMessage
+      actions: Array<{
         handleCallback: () => void
-      }[]
+        label: IntlMessage
+      }>
     }
     newLine?: {
       label: IntlMessage
       handleCallback: () => void
     }
   }
-  lineActions?: {
-    label: () => IntlMessage
+  lineActions?: Array<{
     isDangerous?: boolean
+    label: () => IntlMessage
     onClick: Function
-  }[]
+  }>
   bulkActions?: {
     texts: {
       secondaryActionsLabel: string
@@ -79,10 +80,10 @@ type TableProps<TItem, TSchema extends JSONSchema6Type> = {
       label: string
       handleCallback: Function
     }
-    others: {
-      label: string
+    others: Array<{
       handleCallback: Function
-    }[]
+      label: string
+    }>
   }
 }
 
@@ -91,12 +92,12 @@ export type IntlMessage = string | JSX.Element
 
 const messages = defineMessages({
   of: {
-    id: 'admin/table.of',
     defaultMessage: 'of',
+    id: 'admin/table.of',
   },
   showRowsLabel: {
-    id: 'admin/table.show-rows',
     defaultMessage: 'Show rows',
+    id: 'admin/table.show-rows',
   },
 })
 
@@ -110,9 +111,7 @@ const PaginatedTable = <
   const [from, setFrom] = useState(0)
   const [to, setTo] = useState(INITIAL_ELEMENTS_PER_PAGE)
   const [currentPage, setCurrentPage] = useState(0)
-  const [elementsPerPage, setElementsPerPage] = useState(
-    INITIAL_ELEMENTS_PER_PAGE
-  )
+  const [elementsPerPage, setElementsPerPage] = useState(INITIAL_ELEMENTS_PER_PAGE)
   const [sortedBy, setSortedBy] = useState('')
   const [sortOrder, setSortOrder] = useState('ASC')
 
@@ -123,6 +122,7 @@ const PaginatedTable = <
     fetchMore,
     updatePaginationKey,
     onSortChange = () => {},
+    selectedRows,
     ...tableProps
   } = props
 
@@ -156,8 +156,7 @@ const PaginatedTable = <
 
   const nextPage = (currentPage + 1) % totalPages
 
-  const previousPage =
-    totalPages - 1 - ((totalPages - currentPage) % totalPages)
+  const previousPage = totalPages - 1 - ((totalPages - currentPage) % totalPages)
 
   return (
     <Table
@@ -180,8 +179,8 @@ const PaginatedTable = <
       }}
       density="low"
       sort={{
-        sortedBy,
         sortOrder,
+        sortedBy,
       }}
       onSort={({
         sortOrder: newSortOrder,
@@ -195,6 +194,10 @@ const PaginatedTable = <
         onSortChange(newSortedBy, newSortOrder)
       }}
       {...tableProps}
+      bulkActions={{
+        ...props.bulkActions,
+        selectedRows,
+      }}
     />
   )
 }

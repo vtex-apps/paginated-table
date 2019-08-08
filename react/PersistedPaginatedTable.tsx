@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react'
-import { Table } from 'vtex.styleguide'
 import { JSONSchema6Type } from 'json-schema'
+import React, { useEffect, useRef } from 'react'
 import { defineMessages, FormattedMessage } from 'react-intl'
+import { Table } from 'vtex.styleguide'
 
 import { useRuntime } from 'vtex.render-runtime'
 
@@ -24,6 +24,7 @@ type TableProps<TItem, TSchema extends JSONSchema6Type> = {
   onRowClick?: OnRowClickHandler<TItem>
   totalizers?: any
   filters?: any
+  selectedRows?: any[]
   toolbar?: {
     inputSearch?: {
       value: IntlMessage
@@ -53,21 +54,21 @@ type TableProps<TItem, TSchema extends JSONSchema6Type> = {
     }
     extraActions?: {
       label: IntlMessage
-      actions: {
-        label: IntlMessage
+      actions: Array<{
         handleCallback: () => void
-      }[]
+        label: IntlMessage
+      }>
     }
     newLine?: {
       label: IntlMessage
       handleCallback: () => void
     }
   }
-  lineActions?: {
-    label: () => IntlMessage
+  lineActions?: Array<{
     isDangerous?: boolean
+    label: () => IntlMessage
     onClick: Function
-  }[]
+  }>
   bulkActions?: {
     texts: {
       secondaryActionsLabel: string
@@ -80,10 +81,10 @@ type TableProps<TItem, TSchema extends JSONSchema6Type> = {
       label: string
       handleCallback: Function
     }
-    others: {
-      label: string
+    others: Array<{
       handleCallback: Function
-    }[]
+      label: string
+    }>
   }
 }
 
@@ -92,19 +93,16 @@ export type IntlMessage = string | JSX.Element
 
 const messages = defineMessages({
   of: {
-    id: 'admin/table.of',
     defaultMessage: 'of',
+    id: 'admin/table.of',
   },
   showRowsLabel: {
-    id: 'admin/table.show-rows',
     defaultMessage: 'Show rows',
+    id: 'admin/table.show-rows',
   },
 })
 
-const PersistedPaginatedTable = <
-  TItem,
-  TSchema extends JSONSchema6Type
->(
+const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
   props: Props<TItem, TSchema>
 ) => {
   const didMountRef = useRef(false)
@@ -118,6 +116,7 @@ const PersistedPaginatedTable = <
     defaultSortOrder = 'ASC',
     defaultElementsPerPage = INITIAL_ELEMENTS_PER_PAGE,
     defaultSortedBy = '',
+    selectedRows,
     ...tableProps
   } = props
 
@@ -164,7 +163,11 @@ const PersistedPaginatedTable = <
           const newElementsPerPage = parseInt(e.target.value)
           const currentPage = Math.floor(from / newElementsPerPage)
           const newFrom = currentPage * newElementsPerPage
-          setQuery({ elements: newElementsPerPage, from: newFrom, to: newFrom + newElementsPerPage })
+          setQuery({
+            elements: newElementsPerPage,
+            from: newFrom,
+            to: newFrom + newElementsPerPage,
+          })
         },
         textOf: <FormattedMessage {...messages.of} />,
         textShowRows: <FormattedMessage {...messages.showRowsLabel} />,
@@ -172,8 +175,8 @@ const PersistedPaginatedTable = <
       }}
       density="low"
       sort={{
-        sortedBy,
         sortOrder,
+        sortedBy,
       }}
       onSort={({
         sortOrder: newSortOrder,
@@ -185,6 +188,10 @@ const PersistedPaginatedTable = <
         setQuery({ sortOrder: newSortOrder, sortedBy: newSortedBy })
       }}
       {...tableProps}
+      bulkActions={{
+        ...props.bulkActions,
+        selectedRows,
+      }}
     />
   )
 }
