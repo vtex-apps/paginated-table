@@ -21,7 +21,7 @@ type TableProps<TItem, TSchema extends JSONSchema6Type> = {
   emptyStateLabel?: React.ReactNode
   emptyStateChildren?: React.ReactNode
   onRowClick?: OnRowClickHandler<TItem>
-  selectedRows?: any
+  selectedRows?: any[]
   totalizers?: any
   filters?: any
   toolbar?: {
