@@ -158,7 +158,7 @@ const PersistedPaginatedTable = <
         currentItemTo: to,
         onNextClick: onPageChange(from, elementsPerPage, 'next'),
         onPrevClick: onPageChange(from, elementsPerPage, 'prev'),
-        rowsOptions: [5, 10, 15, 25],
+        rowsOptions: [5, 15, 25, 50],
         selectedOption: elementsPerPage,
         onRowsChange: async (e: React.ChangeEvent<HTMLSelectElement>) => {
           const newElementsPerPage = parseInt(e.target.value)
