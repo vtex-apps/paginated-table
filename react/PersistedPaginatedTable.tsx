@@ -101,10 +101,7 @@ const messages = defineMessages({
   },
 })
 
-const PersistedPaginatedTable = <
-  TItem,
-  TSchema extends JSONSchema6Type
->(
+const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
   props: Props<TItem, TSchema>
 ) => {
   const didMountRef = useRef(false)
@@ -121,9 +118,11 @@ const PersistedPaginatedTable = <
     ...tableProps
   } = props
 
+  const elementsPerPage = parseInt(query.elements) || defaultElementsPerPage
+
   useEffect(() => {
     if (didMountRef.current) {
-      setQuery({ to: defaultElementsPerPage, from: 0, elements: defaultElementsPerPage })
+      setQuery({ to: elementsPerPage, from: 0, elements: elementsPerPage })
     } else {
       didMountRef.current = true
     }
@@ -143,7 +142,6 @@ const PersistedPaginatedTable = <
     setQuery({ to: newTo, from: newFrom, elements: currentElementsPerPage })
   }
 
-  const elementsPerPage = parseInt(query.elements) || defaultElementsPerPage
   const from = parseInt(query.from) || 0
   const to = parseInt(query.to) || elementsPerPage
   const sortOrder = query.sortOrder || defaultSortOrder
@@ -164,7 +162,11 @@ const PersistedPaginatedTable = <
           const newElementsPerPage = parseInt(e.target.value)
           const currentPage = Math.floor(from / newElementsPerPage)
           const newFrom = currentPage * newElementsPerPage
-          setQuery({ elements: newElementsPerPage, from: newFrom, to: newFrom + newElementsPerPage })
+          setQuery({
+            elements: newElementsPerPage,
+            from: newFrom,
+            to: newFrom + newElementsPerPage,
+          })
         },
         textOf: <FormattedMessage {...messages.of} />,
         textShowRows: <FormattedMessage {...messages.showRowsLabel} />,
