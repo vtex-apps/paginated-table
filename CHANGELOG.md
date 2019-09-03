@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.2] - 2019-09-03
+
 ### Fixed
 
 - Sorting table bug that caused the page size to change to default
