@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Options for number of rows are now [10, 15, 25]
+
 ## [0.5.2] - 2019-09-03
 
 ### Fixed

@@ -156,7 +156,7 @@ const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
         currentItemTo: to,
         onNextClick: onPageChange(from, elementsPerPage, 'next'),
         onPrevClick: onPageChange(from, elementsPerPage, 'prev'),
-        rowsOptions: [5, 15, 25, 50],
+        rowsOptions: [10, 15, 25],
         selectedOption: elementsPerPage,
         onRowsChange: async (e: React.ChangeEvent<HTMLSelectElement>) => {
           const newElementsPerPage = parseInt(e.target.value)
