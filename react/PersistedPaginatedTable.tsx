@@ -174,8 +174,9 @@ const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
       }}
       density="low"
       sort={{
-        sortedBy,
+        preferentialSortOrder: defaultSortOrder,
         sortOrder,
+        sortedBy,
       }}
       onSort={({
         sortOrder: newSortOrder,
