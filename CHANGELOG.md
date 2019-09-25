@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.4] - 2019-09-25
+
 ### Changed
 
 - Default sort order is now used as the persisted table preferred sort order
