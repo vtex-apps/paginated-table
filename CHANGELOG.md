@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Dynamic row height option to persisted table API
+
 ## [0.5.4] - 2019-09-25
 
 ### Changed
