@@ -21,6 +21,7 @@ type TableProps<TItem, TSchema extends JSONSchema6Type> = {
   loading?: boolean
   emptyStateLabel?: React.ReactNode
   emptyStateChildren?: React.ReactNode
+  dynamicRowHeight?: boolean
   onRowClick?: OnRowClickHandler<TItem>
   totalizers?: any
   filters?: any
