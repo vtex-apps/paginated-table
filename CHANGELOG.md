@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Redirect to first page when user is in page that beyond the total of items
+
 ### Added
 
 - Dynamic row height option to persisted table API
