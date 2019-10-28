@@ -20,5 +20,6 @@
   "scripts": {
     "lint": "tsc --noEmit && tslint -c tslint.json './**/*.ts'",
     "test": "vtex-test-tools test"
-  }
+  },
+  "version": "0.5.5"
 }
