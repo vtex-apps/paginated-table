@@ -129,6 +129,12 @@ const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
     }
   }, [updatePaginationKey])
 
+  useEffect(() => {
+    if (total && total < query.to) {
+      setQuery({ to: elementsPerPage, from: 0, elements: elementsPerPage })
+    }
+  }, [total])
+
   const onPageChange = (
     currentFrom: number,
     currentElementsPerPage: number,
