@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Accept and propagate prop onRowHover for persisted table
+
 ## [0.5.5] - 2019-10-28
 
 ### Changed
