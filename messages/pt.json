@@ -1,4 +1,5 @@
 {
   "admin/table.show-rows": "Mostrar linhas",
-  "admin/table.of": "de"
+  "admin/table.of": "de",
+  "admin/table.item-label": "{total, plural, one {item} other {itens}}"
 }

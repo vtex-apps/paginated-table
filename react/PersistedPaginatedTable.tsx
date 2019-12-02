@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react'
-import { Table } from 'vtex.styleguide'
 import { JSONSchema6Type } from 'json-schema'
+import React, { useEffect, useRef } from 'react'
 import { defineMessages, FormattedMessage } from 'react-intl'
 
 import { useRuntime } from 'vtex.render-runtime'
+import { Table } from 'vtex.styleguide'
 
 const INITIAL_ELEMENTS_PER_PAGE = 15
 
@@ -15,7 +15,7 @@ type Props<TItem, TSchema extends JSONSchema6Type> = {
   defaultSortedBy?: string
 } & TableProps<TItem, TSchema>
 
-type TableProps<TItem, TSchema extends JSONSchema6Type> = {
+interface TableProps<TItem, TSchema extends JSONSchema6Type> {
   items: TItem[]
   schema: TSchema
   loading?: boolean
@@ -55,37 +55,40 @@ type TableProps<TItem, TSchema extends JSONSchema6Type> = {
     }
     extraActions?: {
       label: IntlMessage
-      actions: {
+      actions: Array<{
         label: IntlMessage
         handleCallback: () => void
-      }[]
+      }>
     }
     newLine?: {
       label: IntlMessage
       handleCallback: () => void
     }
   }
-  lineActions?: {
+  lineActions?: Array<{
     label: () => IntlMessage
     isDangerous?: boolean
-    onClick: Function
-  }[]
+    onClick: () => void
+  }>
   bulkActions?: {
     texts: {
       secondaryActionsLabel: string
-      rowsSelected: Function
+      rowsSelected: (qty: number) => void
       selectAll: string
-      allRowsSelected: Function
+      allRowsSelected: () => void
     }
     totalItems?: number
     main: {
       label: string
-      handleCallback: Function
+      handleCallback: (params: { selectedRows: TItem[] }) => void
     }
-    others: {
+    others: Array<{
       label: string
-      handleCallback: Function
-    }[]
+      handleCallback: (params: { selectedRows: TItem[] }) => void
+    }>
+  }
+  pagination: {
+    hasPageTopIndicator: boolean
   }
 }
 
@@ -93,13 +96,17 @@ export type OnRowClickHandler<TItem> = ({ rowData }: { rowData: TItem }) => void
 export type IntlMessage = string | JSX.Element
 
 const messages = defineMessages({
+  itemLabel: {
+    defaultMessage: '{total, plural, one {item} other {items}}',
+    id: 'admin/table.item-label',
+  },
   of: {
-    id: 'admin/table.of',
     defaultMessage: 'of',
+    id: 'admin/table.of',
   },
   showRowsLabel: {
-    id: 'admin/table.show-rows',
     defaultMessage: 'Show rows',
+    id: 'admin/table.show-rows',
   },
 })
 
@@ -117,10 +124,11 @@ const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
     defaultSortOrder = 'ASC',
     defaultElementsPerPage = INITIAL_ELEMENTS_PER_PAGE,
     defaultSortedBy = '',
+    pagination: { hasPageTopIndicator } = { hasPageTopIndicator: false },
     ...tableProps
   } = props
 
-  const elementsPerPage = parseInt(query.elements) || defaultElementsPerPage
+  const elementsPerPage = parseInt(query.elements, 10) || defaultElementsPerPage
 
   useEffect(() => {
     if (didMountRef.current) {
@@ -150,8 +158,8 @@ const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
     setQuery({ to: newTo, from: newFrom, elements: currentElementsPerPage })
   }
 
-  const from = parseInt(query.from) || 0
-  const to = parseInt(query.to) || elementsPerPage
+  const from = parseInt(query.from, 10) || 0
+  const to = parseInt(query.to, 10) || elementsPerPage
   const sortOrder = query.sortOrder || defaultSortOrder
   const sortedBy = query.sortedBy || defaultSortedBy
 
@@ -162,12 +170,12 @@ const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
       pagination={{
         currentItemFrom: from + 1,
         currentItemTo: to,
+        hasPageTopIndicator,
+        itemLabel: <FormattedMessage values={{ total }} {...messages.itemLabel} />,
         onNextClick: onPageChange(from, elementsPerPage, 'next'),
         onPrevClick: onPageChange(from, elementsPerPage, 'prev'),
-        rowsOptions: [10, 15, 25],
-        selectedOption: elementsPerPage,
         onRowsChange: async (e: React.ChangeEvent<HTMLSelectElement>) => {
-          const newElementsPerPage = parseInt(e.target.value)
+          const newElementsPerPage = parseInt(e.target.value, 10)
           const currentPage = Math.floor(from / newElementsPerPage)
           const newFrom = currentPage * newElementsPerPage
           setQuery({
@@ -176,6 +184,8 @@ const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
             to: newFrom + newElementsPerPage,
           })
         },
+        rowsOptions: [10, 15, 25],
+        selectedOption: elementsPerPage,
         textOf: <FormattedMessage {...messages.of} />,
         textShowRows: <FormattedMessage {...messages.showRowsLabel} />,
         totalItems: total,

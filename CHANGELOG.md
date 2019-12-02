@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Support of Styleguide's Table `hasPageTopIndicator` prop.
+
 ## [0.5.7] - 2019-11-21
 
 ### Added
