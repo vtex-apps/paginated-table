@@ -19,6 +19,8 @@ interface TableProps<TItem, TSchema extends JSONSchema6Type> {
   items: TItem[]
   schema: TSchema
   loading?: boolean
+  fullWidth?: boolean
+  density?: 'low' | 'medium' | 'high'
   emptyStateLabel?: React.ReactNode
   emptyStateChildren?: React.ReactNode
   dynamicRowHeight?: boolean
@@ -32,7 +34,7 @@ interface TableProps<TItem, TSchema extends JSONSchema6Type> {
       placeholder: React.ReactNode
       onChange: React.ChangeEventHandler<HTMLInputElement>
       onClear: React.ChangeEventHandler<HTMLInputElement>
-      onSubmit: React.MouseEventHandler<HTMLSpanElement>
+      onSubmit: React.FormEventHandler<HTMLFormElement>
     }
     density?: {
       buttonLabel: IntlMessage
