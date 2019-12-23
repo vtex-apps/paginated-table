@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Table } from 'vtex.styleguide'
 import { GraphqlQueryControls } from 'react-apollo'
 import { JSONSchema6Type } from 'json-schema'
-import { defineMessages, FormattedMessage } from 'react-intl'
+import { defineMessages, useIntl } from 'react-intl'
 
 const INITIAL_ELEMENTS_PER_PAGE = 15
 
@@ -110,11 +110,11 @@ const PaginatedTable = <
   const [from, setFrom] = useState(0)
   const [to, setTo] = useState(INITIAL_ELEMENTS_PER_PAGE)
   const [currentPage, setCurrentPage] = useState(0)
-  const [elementsPerPage, setElementsPerPage] = useState(
-    INITIAL_ELEMENTS_PER_PAGE
-  )
+  const [elementsPerPage, setElementsPerPage] = useState(INITIAL_ELEMENTS_PER_PAGE)
   const [sortedBy, setSortedBy] = useState('')
   const [sortOrder, setSortOrder] = useState('ASC')
+
+  const { formatMessage } = useIntl()
 
   const {
     items = [],
@@ -156,8 +156,7 @@ const PaginatedTable = <
 
   const nextPage = (currentPage + 1) % totalPages
 
-  const previousPage =
-    totalPages - 1 - ((totalPages - currentPage) % totalPages)
+  const previousPage = totalPages - 1 - ((totalPages - currentPage) % totalPages)
 
   return (
     <Table
@@ -174,8 +173,8 @@ const PaginatedTable = <
           setElementsPerPage(parseInt(e.target.value))
           onPageChange(currentPage, parseInt(e.target.value))()
         },
-        textOf: <FormattedMessage {...messages.of} />,
-        textShowRows: <FormattedMessage {...messages.showRowsLabel} />,
+        textOf: formatMessage(messages.of),
+        textShowRows: formatMessage(messages.showRowsLabel),
         totalItems: total,
       }}
       density="low"

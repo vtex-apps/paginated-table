@@ -1,6 +1,6 @@
 import { JSONSchema6Type } from 'json-schema'
 import React, { useEffect, useRef } from 'react'
-import { defineMessages, FormattedMessage } from 'react-intl'
+import { defineMessages, useIntl } from 'react-intl'
 
 import { useRuntime } from 'vtex.render-runtime'
 import { Table } from 'vtex.styleguide'
@@ -118,6 +118,7 @@ const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
   const didMountRef = useRef(false)
 
   const { setQuery, query } = useRuntime()
+  const { formatMessage } = useIntl()
 
   const {
     items = [],
@@ -173,7 +174,7 @@ const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
         currentItemFrom: from + 1,
         currentItemTo: to,
         hasPageTopIndicator,
-        itemLabel: <FormattedMessage values={{ total }} {...messages.itemLabel} />,
+        itemLabel: formatMessage(messages.itemLabel, { total }),
         onNextClick: onPageChange(from, elementsPerPage, 'next'),
         onPrevClick: onPageChange(from, elementsPerPage, 'prev'),
         onRowsChange: async (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -188,8 +189,8 @@ const PersistedPaginatedTable = <TItem, TSchema extends JSONSchema6Type>(
         },
         rowsOptions: [10, 15, 25],
         selectedOption: elementsPerPage,
-        textOf: <FormattedMessage {...messages.of} />,
-        textShowRows: <FormattedMessage {...messages.showRowsLabel} />,
+        textOf: formatMessage(messages.of),
+        textShowRows: formatMessage(messages.showRowsLabel),
         totalItems: total,
       }}
       density="low"

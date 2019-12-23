@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Errors caused by string prop types in styleguide
+
 ## [0.7.0] - 2019-12-18
 
 ### Changed
