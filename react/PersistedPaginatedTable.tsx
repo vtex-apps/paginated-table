@@ -89,7 +89,7 @@ interface TableProps<TItem, TSchema extends JSONSchema6Type> {
       handleCallback: (params: { selectedRows: TItem[] }) => void
     }>
   }
-  pagination: {
+  pagination?: {
     hasPageTopIndicator: boolean
   }
 }
