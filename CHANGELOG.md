@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.3] - 2020-04-27
+
 ### Fixed
 
 - Prop `pagination` type of `PersistedPaginatedTable`, it should be optional since it has a default value.
