@@ -12,7 +12,6 @@ export default function usePersistedTableSort({
 }: {
   defaultSortOrder?: string
 }) {
-  console.log(defaultSortOrder)
   const { setQuery, query } = useRuntime()
 
   const { sortOrder } = query

@@ -15,7 +15,6 @@ export function calculateTableHeight(
   tableSize: number,
   headless?: boolean
 ): number {
-  debugger
   const multiplicator = tableSize !== 0 ? tableSize * rowHeight : EMPTY_STATE_SIZE
   return (headless ? 0 : TABLE_HEADER_HEIGHT) + multiplicator
 }
