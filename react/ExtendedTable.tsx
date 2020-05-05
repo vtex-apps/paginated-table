@@ -1,7 +1,61 @@
 import React from 'react'
 import { EXPERIMENTAL_Table as Table } from 'vtex.styleguide'
 
-const CustomTable = (props: any) => {
+interface Column {
+  id?: string
+  title?: any
+  width?: number | string
+  sortable?: boolean
+  cellRenderer?: any
+  extended?: boolean
+  condensed?: string[]
+}
+
+
+interface TableProps {
+  /** Return of the useTableMeasures hook */
+  measures: any
+  /** Array of columns */
+  columns: Column[]
+  /** Array of items */
+  items: object[]
+  /** Function that generates row keys */
+  rowKey?: (data: { rowData: unknown }) => string
+  /** If the table is empty or not */
+  empty?: boolean
+  /** If the Table is loading or not */
+  loading?: { renderAs: () => React.ReactNode } | boolean
+  /** Function trigged on a row click */
+  onRowClick?: (data: { rowData: any }) => void
+  /** Function that defines if a row is active or not */
+  isRowActive?: (data: unknown) => boolean
+  /** Table EmptyState component */
+  emptyState?: any
+  /** Sorting properties */
+  sorting?: {
+    sorted?: {
+      by?: string,
+      order?: string,
+    },
+    sort: (id: string) => void,
+    clear: () => void
+    // prop specific to this component
+    defaultOrder?: string
+  }
+  /** Base testId */
+  testId?: string
+  /** If the rows should be highlighted on :hover */
+  highlightOnHover?: boolean
+  /** If the header is sticky or not */
+  stickyHeader?: boolean
+
+  // props specific to this component
+  hovering?: any
+  measuringRef?: any
+  children: any
+}
+
+const CustomTable = (props: TableProps) => {
   const { children, measuringRef, hovering, ...tableProps } = props
 
   const { onMouseEnter = () => {}, onMouseLeave = () => {} } = hovering || {}

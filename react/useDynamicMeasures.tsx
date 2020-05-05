@@ -15,8 +15,9 @@ export function calculateTableHeight(
   tableSize: number,
   headless?: boolean
 ): number {
-  const multiplicator = tableSize !== 0 ? tableSize : EMPTY_STATE_SIZE
-  return (headless ? 0 : TABLE_HEADER_HEIGHT) + rowHeight * multiplicator
+  debugger
+  const multiplicator = tableSize !== 0 ? tableSize * rowHeight : EMPTY_STATE_SIZE
+  return (headless ? 0 : TABLE_HEADER_HEIGHT) + multiplicator
 }
 
 const useDynamicMeasures = ({ lenght, headless }: { lenght: number; headless?: boolean }) => {
@@ -30,17 +31,17 @@ const useDynamicMeasures = ({ lenght, headless }: { lenght: number; headless?: b
   }, [])
 
   const measure = (bodyNode: HTMLElement) => {
-    window.requestAnimationFrame(() => setTableHeight(getHeight(bodyNode) + TABLE_HEADER_HEIGHT))
+    window.requestAnimationFrame(() => {
+      const bodyHeight = getHeight(bodyNode)
+      const newHeight = bodyHeight >= BASE_ROW_HEIGHT ? bodyHeight : EMPTY_STATE_SIZE
+      setTableHeight(newHeight + TABLE_HEADER_HEIGHT)
+    })
   }
 
   useLayoutEffect(() => {
     if (!node) {
       return
     }
-    // const measure = () =>
-    //   window.requestAnimationFrame(() =>
-    //     setTableHeight(getHeight(node) + TABLE_HEADER_HEIGHT)
-    //   )
     measure(node)
 
     window.addEventListener('resize', () => measure(node))
