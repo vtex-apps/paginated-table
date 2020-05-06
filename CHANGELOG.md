@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2020-05-06
+
 ### Added
 
 - New `extendedTable` which uses styleguide's table v2 -`usePersistedPagination` hook to be used with Table V2
