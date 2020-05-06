@@ -41,7 +41,7 @@ If you prefer to use the `PersistedPaginatedTable`, you can do it as follows
 import { PersistedPaginatedTable } from 'vtex.paginated-table'
 ```
 
-If you want to use the table V2 and it's hooks do it as follows you can import only the hooks you will be using.
+If you want to use the table V2 and its hooks you can import just the hooks you will be using.
 
 ```jsx
 import { ExtendedTable, useDynamicMeasures, useInverseTableSort } from 'vtex.paginated-table'

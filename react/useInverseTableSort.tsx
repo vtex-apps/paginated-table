@@ -1,12 +1,11 @@
 import { useState } from 'react'
 
-export default function useInverseTableSort(initialState?: any) {
-  const [by, setBy] = useState(initialState.by)
-  const [order, setOrder] = useState(initialState.order)
+export default function useInverseTableSort(initialState?: { by: string; order: string }) {
+  const [by, setBy] = useState<string | undefined>(initialState?.by)
+  const [order, setOrder] = useState<string | undefined>(initialState?.order)
 
   const sort = (id: string) => {
     if (!by || by !== id) {
-      // sortASC(id)
       setOrder('DSC')
       setBy(id)
     } else {
