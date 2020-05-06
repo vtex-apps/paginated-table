@@ -41,6 +41,67 @@ If you prefer to use the `PersistedPaginatedTable`, you can do it as follows
 import { PersistedPaginatedTable } from 'vtex.paginated-table'
 ```
 
+If you want to use the table V2 and its hooks you can import just the hooks you will be using.
+
+```jsx
+import { ExtendedTable, useDynamicMeasures, useInverseTableSort } from 'vtex.paginated-table'
+```
+
+## Table V2
+
+### ExtendedTable
+
+This table works like styleguide's table V2 with some extra optional params to add the following features:
+
+- Sorting with default ordering = 'DSC'
+- Dynamic row heights
+- Detecting on rowHover
+
+#### To use hovering:
+
+Add parameter `hovering`
+
+```jsx
+const hovering = {
+  // called when hovering a row
+  onMouseEnter = (id: string) => void
+  // called when mouse leaves table (so it's no longer hovering any row)
+  onMouseLeave = () => void
+}
+```
+
+#### To use dynamic rowHeights:
+
+Add parameter `measuringRef` to table and use `useDynamicMeasures` to get the parameter `measures` and ref
+
+```jsx
+const { ref, measures } = useDynamicMeasures({
+    lenght: items.length || 0,
+  })
+
+  <ExtendedTable
+    measures={measures}
+    measuringRef={ref}
+    {...}
+  />
+```
+
+#### To use sorting with default sort order:
+
+Use either hook `useInverseTableSort` or `usePersistedTableSort` with defaultSortOrder parameter to get `sorting` and feed it to the table
+
+```jsx
+const { sortOrder, sortedBy: sortBy, sorting } = usePersistedTableSort({
+    defaultSortOrder: 'DSC',
+  })
+
+  <ExtendedTable
+    sorting={sorting}
+  />
+```
+
+## Table V1
+
 ### PaginatedTable
 
 Along the usual [Styleguide Table's props](https://styleguide.vtex.com/#/Components/Display/Table), this table has the following props:

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- New `extendedTable` which uses styleguide's table v2 -`usePersistedPagination` hook to be used with Table V2
+- `useInverseTableSort` hook to be used with Table V2
+- `usePersistedTableSort` hook which accepts both sorting directions to be used with Table
+  V2
+- `useDynamicMeasures` hook to be used with Table V2
+
 ## [0.7.3] - 2020-04-27
 
 ### Fixed
