@@ -103,11 +103,12 @@ const CollapsableRow = (props: {key: string,
   return (
     <>
     <Table.Sections.Body.Row
+      style= {isExpanded && {backgroundColor: '#EDF4FE'}}
       {...rowPropsWithExtraInfo}
     />
     {
-      isExpanded && <tr><td colSpan={columns.length} className="bb">
-        <div className="flex justify-center items-center h3">
+      isExpanded && <tr><td colSpan={columns.length} className="bb b--muted-4" style={{backgroundColor: '#EDF4FE'}}>
+        <div className="flex justify-center items-center">
           {rowProps.data.extendedRowRenderer}
         </div>
       </td></tr>
@@ -135,7 +136,7 @@ const CustomTable = (props: TableProps) => {
           }
           <Table.Sections.Body ref={measuringRef}>
             {({ key, props: rowProps }: { key: string; props: any }) => {
-              return !rowProps.data.isExpandable ? (
+              return !rowProps.data.isExpandable || !props.rowExpansion?.isRowExpandedMap ? (
                 <Table.Sections.Body.Row
                   key={key}
                   onMouseEnter={() => onMouseEnter(rowProps.data.id)}
@@ -145,7 +146,7 @@ const CustomTable = (props: TableProps) => {
                 <CollapsableRow
                   key={key}
                   onMouseEnter={() => onMouseEnter(rowProps.data.id)}
-                  tableProps={props}
+                  columns={props.columns}
                   isExpanded ={props.rowExpansion?.isRowExpandedMap[rowProps.data.id]}
                   {...rowProps}
                 />
