@@ -71,7 +71,7 @@ const HeadWithDefaultSorting = ({sorting}: {sorting: {
 }}) => {
  return (<Table.Sections.Head>
  {({ props, column, key }: any) => {
-   const isCurrentlySortedColumn = sorting.sorted && sorting.sorted.by === column.id
+   const isCurrentlySortedColumn = sorting.sorted?.by === column.id
    const sortingDefaultOrder = sorting.defaultOrder || 'ASC'
    const isAscending = !isCurrentlySortedColumn ? sortingDefaultOrder === 'ASC' : sorting.sorted?.order == 'ASC'
    return (
