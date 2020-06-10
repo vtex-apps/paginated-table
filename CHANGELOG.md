@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Expand rows to show "hidden" additional data functionality to `extendedTable` -`useExpandableRows` hook to provide control for row expansion
+
+### Fixed
+
+- `children` prop being erroneously required on `extendedTable`
+
 ## [0.8.0] - 2020-05-06
 
 ### Added

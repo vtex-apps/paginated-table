@@ -56,6 +56,7 @@ This table works like styleguide's table V2 with some extra optional params to a
 - Sorting with default ordering = 'DSC'
 - Dynamic row heights
 - Detecting on rowHover
+- Expandable rows (rows that can be expanded vertically to show more info)
 
 #### To use hovering:
 
@@ -97,6 +98,52 @@ const { sortOrder, sortedBy: sortBy, sorting } = usePersistedTableSort({
 
   <ExtendedTable
     sorting={sorting}
+  />
+```
+
+### To use row expansion functionality
+
+You must add `rowExpansion` prop which contains a map indicating what rows are expanded. You can use the `useExpandableRows` hook as the value for `rowExpansion`.
+
+Additionally, to the data of each item on the table you must add the props:
+
+```jsx
+{
+  // indicates if this row will be expandable, set it to always true if you want all rows
+  // to be expandable
+  isExpandable?: boolean
+  // what will be rendered inside the expanded are for this row
+  extendedRowRenderer?: React.ReactNode,
+}
+```
+
+Inside any cell rendered for a column you will get the addtional info `isExpanded` in case you want to change the style based on that. (be aware you will only get this data if this column is defined with `isExtended` the prop that makes the cell get the full rowData)
+
+```jsx
+  const items = rawData.map((item: any) => ({
+    name: item.fullName
+    isExpandable: true,
+    extendedRowRenderer: <ExtraInfoComponent item={item} />,
+    id: item.ID,
+  }))
+
+  // the items array MUST have id for each item, this is used to control what rows are expanded
+  const rowExpansion = useExpandableRows({
+    items,
+  })
+
+
+  <ExtendedTable
+    onRowClick={({
+      rowData: { id },
+    }: {
+      rowData: {
+        id: any
+      }
+    }) => {
+      rowExpansion.toggleExpandRow(id)
+    }}
+    rowExpansion={rowExpansion}
   />
 ```
 
