@@ -60,6 +60,18 @@ interface TableProps {
   children?: any
 }
 
+const HeadWithoutUpperLine = () => (
+  <Table.Sections.Head>
+  {({ props, column, key }: any) => {
+    return (
+      <Table.Sections.Head.Cell key={key} {...props} style={{borderTopStyle: "none"}}>
+        {column.title}
+      </Table.Sections.Head.Cell>
+    )
+  }}
+  </Table.Sections.Head>
+)
+
 const HeadWithDefaultSorting = ({sorting}: {sorting: {
   sorted?: {
     by?: string,
@@ -75,7 +87,7 @@ const HeadWithDefaultSorting = ({sorting}: {sorting: {
    const sortingDefaultOrder = sorting.defaultOrder || 'ASC'
    const isAscending = !isCurrentlySortedColumn ? sortingDefaultOrder === 'ASC' : sorting.sorted?.order == 'ASC'
    return (
-     <Table.Sections.Head.Cell key={key} style={{borderTopStyle: "none"}} {...props}>
+     <Table.Sections.Head.Cell key={key} {...props} style={{borderTopStyle: "none"}}>
        {column.title}
        <Table.Sections.Head.Cell.Suffix sorting={isCurrentlySortedColumn} ascending={isAscending} />
      </Table.Sections.Head.Cell>
@@ -86,11 +98,12 @@ const HeadWithDefaultSorting = ({sorting}: {sorting: {
 
 const CollapsableRow = (props: {key: string,
   onMouseEnter: () => void,
+  onRowClick: (data: { rowData: any }) => void,
   isExpanded: boolean
   columns: Column[],
   data: any
 }) => {
-  const { columns, isExpanded, ...rowProps} = props
+  const { columns, isExpanded, onRowClick, ...rowProps} = props
 
   const rowPropsWithExtraInfo = {
     ...rowProps,
@@ -103,12 +116,20 @@ const CollapsableRow = (props: {key: string,
   return (
     <>
     <Table.Sections.Body.Row
-      style= {isExpanded && {backgroundColor: '#EDF4FE'}}
       {...rowPropsWithExtraInfo}
-    />
+      >
+       {({ key, props, content }: any) => (
+        <Table.Sections.Body.Row.Cell key={key} 
+          style= {isExpanded && {backgroundColor: '#EDF4FE', borderBottomStyle: "none"}}
+          {...props}
+        >
+          {content}
+        </Table.Sections.Body.Row.Cell>
+       )}
+      </Table.Sections.Body.Row>
     {
-      isExpanded && <tr><td colSpan={columns.length} className="bb b--muted-4" style={{backgroundColor: '#EDF4FE'}}>
-        <div className="flex justify-center items-center">
+      isExpanded && <tr  onClick={() => onRowClick({ rowData: rowPropsWithExtraInfo.data })}><td colSpan={columns.length} className="bb b--muted-4" style={{backgroundColor: '#EDF4FE'}}>
+        <div className="flex justify-center items-center pointer">
           {rowProps.data.extendedRowRenderer}
         </div>
       </td></tr>
@@ -129,7 +150,7 @@ const CustomTable = (props: TableProps) => {
         <Table.Sections>
           {
             !sorting ? 
-              <Table.Sections.Head/>
+              <HeadWithoutUpperLine />
             : (
               <HeadWithDefaultSorting sorting={sorting} />
             )
@@ -146,6 +167,7 @@ const CustomTable = (props: TableProps) => {
                 <CollapsableRow
                   key={key}
                   onMouseEnter={() => onMouseEnter(rowProps.data.id)}
+                  onRowClick={tableProps.onRowClick}
                   columns={props.columns}
                   isExpanded ={props.rowExpansion?.isRowExpandedMap[rowProps.data.id]}
                   {...rowProps}
