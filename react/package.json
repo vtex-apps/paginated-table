@@ -22,5 +22,5 @@
     "lint": "tsc --noEmit && tslint -c tslint.json './**/*.ts'",
     "test": "vtex-test-tools test"
   },
-  "version": "0.9.0"
+  "version": "0.10.0"
 }
