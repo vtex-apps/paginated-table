@@ -41,7 +41,7 @@ export default function usePersistedPagination(props: {
     currentFrom: number,
     currentElementsPerPage: number,
     direction: string
-  ) => async () => {
+  ) => () => {
     const c = direction === 'next' ? 1 : -1
 
     const newFrom = currentFrom + c * currentElementsPerPage
@@ -77,7 +77,7 @@ export default function usePersistedPagination(props: {
       hasPageTopIndicator,
       onNextClick: onPageChange(from, elementsPerPage, 'next'),
       onPrevClick: onPageChange(from, elementsPerPage, 'prev'),
-      onRowsChange: async (e: React.ChangeEvent<HTMLSelectElement>) => {
+      onRowsChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newElementsPerPage = parseInt(e.target.value, 10)
         const currentPage = Math.floor(from / newElementsPerPage)
         const newFrom = currentPage * newElementsPerPage
