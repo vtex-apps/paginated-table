@@ -64,7 +64,7 @@ export default function usePersistedPagination(props: {
     } else {
       didMountRef.current = true
     }
-  }, [resetPaginationOnChangeKey, resetPagination])
+  }, [resetPaginationOnChangeKey])
 
   return {
     resetPagination,
