@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.1] - 2020-08-05
+
 ### Changed
 
 - Trigger onMouseLeave event when moving mouse from table body area to table header area
