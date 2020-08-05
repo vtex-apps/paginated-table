@@ -144,40 +144,38 @@ const CustomTable = (props: TableProps) => {
   const { onMouseEnter = () => {}, onMouseLeave = () => {} } = hovering || {}
   const { sorting } = tableProps
   return (
-    <div onMouseLeave={onMouseLeave}>
-      <Table composableSections {...tableProps}>
-        {children}
-        <Table.Sections>
-          {
-            !sorting ? 
-              <HeadWithoutUpperLine />
-            : (
-              <HeadWithDefaultSorting sorting={sorting} />
+    <Table composableSections {...tableProps}>
+      {children}
+      <Table.Sections>
+        {
+          !sorting ? 
+            <HeadWithoutUpperLine />
+          : (
+            <HeadWithDefaultSorting sorting={sorting} />
+          )
+        }
+        <Table.Sections.Body ref={measuringRef} onMouseLeave={onMouseLeave}>
+          {({ key, props: rowProps }: { key: string; props: any }) => {
+            return !rowProps.data.isExpandable || !props.rowExpansion?.isRowExpandedMap ? (
+              <Table.Sections.Body.Row
+                key={key}
+                onMouseEnter={() => onMouseEnter(rowProps.data.id)}
+                {...rowProps}
+              />
+            ) : (
+              <CollapsableRow
+                key={key}
+                onMouseEnter={() => onMouseEnter(rowProps.data.id)}
+                onRowClick={tableProps.onRowClick}
+                columns={props.columns}
+                isExpanded ={props.rowExpansion?.isRowExpandedMap[rowProps.data.id]}
+                {...rowProps}
+              />
             )
-          }
-          <Table.Sections.Body ref={measuringRef}>
-            {({ key, props: rowProps }: { key: string; props: any }) => {
-              return !rowProps.data.isExpandable || !props.rowExpansion?.isRowExpandedMap ? (
-                <Table.Sections.Body.Row
-                  key={key}
-                  onMouseEnter={() => onMouseEnter(rowProps.data.id)}
-                  {...rowProps}
-                />
-              ) : (
-                <CollapsableRow
-                  key={key}
-                  onMouseEnter={() => onMouseEnter(rowProps.data.id)}
-                  onRowClick={tableProps.onRowClick}
-                  columns={props.columns}
-                  isExpanded ={props.rowExpansion?.isRowExpandedMap[rowProps.data.id]}
-                  {...rowProps}
-                />
-              )
-            }}
-          </Table.Sections.Body>
-        </Table.Sections>
-      </Table>
-    </div>
+          }}
+        </Table.Sections.Body>
+      </Table.Sections>
+    </Table>
   )
 }
 
