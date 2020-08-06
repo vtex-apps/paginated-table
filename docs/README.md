@@ -112,7 +112,7 @@ Additionally, to the data of each item on the table you must add the props:
   // indicates if this row will be expandable, set it to always true if you want all rows
   // to be expandable
   isExpandable?: boolean
-  // what will be rendered inside the expanded are for this row
+  // what will be rendered inside the expanded area for this row
   extendedRowRenderer?: React.ReactNode,
 }
 ```
@@ -122,9 +122,10 @@ Inside any cell rendered for a column you will get the addtional info `isExpande
 ```jsx
   const items = rawData.map((item: any) => ({
     name: item.fullName
+    // REQUIRED parameters:
+    id: item.ID,
     isExpandable: true,
     extendedRowRenderer: <ExtraInfoComponent item={item} />,
-    id: item.ID,
   }))
 
   // the items array MUST have id for each item, this is used to control what rows are expanded

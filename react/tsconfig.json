@@ -1,26 +1,30 @@
 {
   "compilerOptions": {
-    "lib": ["es2017", "dom"],
-    "types": ["node", "jest"],
-    "typeRoots": ["node_modules/@types"],
-    "sourceMap": true,
+    "alwaysStrict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "jsx": "react",
-    "allowSyntheticDefaultImports": true,
+    "lib": ["es2017", "dom"],
+    "module": "es6",
+    "moduleResolution": "node",
     "noEmitOnError": true,
+    "noImplicitAny": true,
     "noImplicitReturns": true,
+    "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
     "skipLibCheck": true,
-    "strictPropertyInitialization": true
+    "sourceMap": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "target": "es2017",
+    "typeRoots": ["node_modules"],
+    "types": ["node", "jest", "graphql"]
   },
+  "exclude": ["node_modules"],
+  "include": ["./typings/*.d.ts", "./**/*.tsx"],
   "typeAcquisition": {
     "enable": false
-  },
-  "exclude": ["node_modules", "**/*.test.ts"],
-  "include": ["./**/*.ts", "./typings/*.d.ts"]
+  }
 }
