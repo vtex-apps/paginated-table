@@ -1,4 +1,4 @@
-import { useState, useCallback, useLayoutEffect } from 'react'
+import { useCallback, useLayoutEffect, useState } from 'react'
 
 const getHeight = (node: HTMLElement) => {
   const rect = node.getBoundingClientRect()
@@ -15,7 +15,7 @@ export function calculateTableHeight(
   tableSize: number,
   headless?: boolean
 ): number {
-  const multiplicator = tableSize !== 0 ? tableSize * rowHeight : EMPTY_STATE_SIZE
+  const multiplicator = Boolean(tableSize) ? tableSize * rowHeight : EMPTY_STATE_SIZE
   return (headless ? 0 : TABLE_HEADER_HEIGHT) + multiplicator
 }
 
@@ -51,8 +51,8 @@ const useDynamicMeasures = ({ lenght, headless }: { lenght: number; headless?: b
   }, [node])
 
   return {
+    measures: { tableHeight, rowHeight: 'auto' },
     ref,
-    measures: { tableHeight },
     triggerResize: node ? () => measure(node) : () => {},
   }
 }
