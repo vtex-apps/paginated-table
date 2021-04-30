@@ -1,0 +1,5 @@
+{
+    "admin/table.show-rows": "Show rows",
+    "admin/table.of": "of",
+    "admin/table.item-label": "{total, plural, one {item} other {items}}"
+}
