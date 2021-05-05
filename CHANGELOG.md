@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- I18n Fr, It, Kr, Nl and En.
+
+### Changed
+
+- Crowdin configuration file
+
+### Added
+
 - JP and RO i18n
 
 ## [0.10.3] - 2020-09-03
