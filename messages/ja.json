@@ -1,0 +1,5 @@
+{
+    "admin/table.show-rows": "表示行数",
+    "admin/table.of": "/",
+    "admin/table.item-label": "{total, plural, one {項目} other {項目}}"
+}
