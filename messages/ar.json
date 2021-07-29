@@ -1,0 +1,5 @@
+{
+    "admin/table.show-rows": "عرض الخانات",
+    "admin/table.of": "من",
+    "admin/table.item-label": "{total, plural, one {عنصر} other {عناصر}}"
+}
