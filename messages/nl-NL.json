@@ -1,5 +1,5 @@
 {
-    "admin/table.show-rows": "Toon rijen",
-    "admin/table.of": "van",
-    "admin/table.item-label": "{total, plural, one {item} other {items}}"
+  "admin/table.show-rows": "Toon rijen",
+  "admin/table.of": "van",
+  "admin/table.item-label": "{total, plural, one {item} other {items}}"
 }
