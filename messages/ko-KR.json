@@ -1,5 +1,0 @@
-{
-    "admin/table.show-rows": "행 표시",
-    "admin/table.of": "/",
-    "admin/table.item-label": "{total, plural, one {항목} other {항목}}"
-}
