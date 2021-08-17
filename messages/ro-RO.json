@@ -1,0 +1,5 @@
+{
+  "admin/table.show-rows": "Arată rânduri",
+  "admin/table.of": "din",
+  "admin/table.item-label": "{total, plural, one {articol} few {articole} other {articole}}"
+}

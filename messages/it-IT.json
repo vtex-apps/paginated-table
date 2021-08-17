@@ -1,0 +1,5 @@
+{
+  "admin/table.show-rows": "Mostra righe",
+  "admin/table.of": "di",
+  "admin/table.item-label": "{total, plural, one {articolo} other {articoli}}"
+}
