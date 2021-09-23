@@ -1,0 +1,5 @@
+{
+    "admin/table.show-rows": "Показване на редове",
+    "admin/table.of": "от",
+    "admin/table.item-label": "{total, plural, one {артикул} other {артикули}}"
+}

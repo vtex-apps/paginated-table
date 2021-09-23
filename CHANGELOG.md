@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- I18n bg-BG.
+
+### Changed
+
+- I18n fr-FR.
+
+### Fixed
+
+- I18n files indentation (it-IT, ja-JP, ko-KR, nl-NL, ro-RO).
+
+### Removed
+
+- Unused I18n files (ar, bs, es-ar, es-es, fr, it, ja, ko, nl, rm, ro).
+
 ## [0.12.0] - 2021-08-03
 
 ### Added
