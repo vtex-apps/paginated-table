@@ -1,0 +1,5 @@
+{
+    "admin/table.show-rows": "Mostrar filas",
+    "admin/table.of": "de",
+    "admin/table.item-label": "{total, plural, one {ítem} other {ítems}}"
+}
