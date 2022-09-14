@@ -1,5 +1,5 @@
 {
   "admin/table.show-rows": "แสดงแถว",
   "admin/table.of": "ของ",
-  "admin/table.item-label": "{total, plural, one {แถว} other {แถว}}"
+  "admin/table.item-label": "{total, plural, one {รายการ} other {รายการ}}"
 }
