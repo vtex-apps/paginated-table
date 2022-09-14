@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.2] - 2022-09-14
+
 ### Fixed
 - Spanish, Italian, Japanese and Thai translations.
 
