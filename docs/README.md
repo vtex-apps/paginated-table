@@ -1,10 +1,12 @@
+> :warning: **Unmantained**: This repository is currently unmaintaned and is considered obsolete. It's based on VTEX Styleguide, which is no longer being worked on. Please consider migrating to [ADMIN UI's table and hooks](https://admin-ui.vercel.app/components/table), some of these functionalities are already provided by it and it's flexible enough to allow for the others. Feel free to re-use code from the hooks implemented here in your project if it makes sense to you
+> 
+> If you'd like to keep updating this repository you are able to contribute and make new releases as long as you are in the `tech` team on vtex-apps. It is no longer adviseble to evolve functionalities based on styleguide's table though.
+
 # Paginated Table
 
 ## Description
 
 The Paginated Table is a wrapper to the VTEX Styleguide Table that abstracts some of the logic that normally one should write to handle pagination with GraphQL
-
-:loudspeaker: **Disclaimer:** Don't fork this project; use, contribute, or open issue with your feature request.
 
 ## Table of Contents
 
@@ -180,11 +182,3 @@ Along the usual [Styleguide Table's props](https://styleguide.vtex.com/#/Compone
 | `defaultElementsPerPage` | `Number`                   | The default number of elements per table page            | `15`          |
 | `defaultSortOrder`       | One of [`'ASC'`, `'DESC'`] | The default sort order for the page                      | `'ASC'`       |
 | `defaultSortedBy`        | `String`                   | The default column by which the table is to be sorted by | `''`          |
-
-## Troubleshooting
-
-You can check if others are passing through similar issues [here](https://github.com/vtex-apps/paginated-table/issues). Also feel free to [open issues](https://github.com/vtex-apps/paginated-table/issues/new) or contribute with pull requests.
-
-## Contributing
-
-Check it out [how to contribute](https://github.com/vtex-apps/awesome-io#contributing) with this project.
