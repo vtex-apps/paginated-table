@@ -1,0 +1,5 @@
+{
+    "admin/table.show-rows": "Zeilen anzeigen",
+    "admin/table.of": "von",
+    "admin/table.item-label": "{total, plural, one {Artikel} other {Artikel}}"
+}
